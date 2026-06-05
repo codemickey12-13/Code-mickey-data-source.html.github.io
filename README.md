@@ -7,7 +7,7 @@ html = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Code Mickey Data Source & Trading Platform</title>
+<title>Code Mickey - Data, Trading & Gaming Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
@@ -33,6 +33,15 @@ color:#fff;overflow-x:hidden;
 50%{opacity:1}
 100%{opacity:0.7}
 }
+@keyframes planeRise{
+0%{transform:translateY(0px) translateX(0px)}
+50%{transform:translateY(-150px) translateX(100px)}
+100%{transform:translateY(0px) translateX(200px)}
+}
+@keyframes crash{
+0%{opacity:1;transform:scale(1)}
+100%{opacity:0;transform:scale(0.5)}
+}
 .navbar{
 background:rgba(0,0,0,0.3);
 padding:15px 30px;
@@ -43,6 +52,7 @@ position:sticky;
 top:0;
 z-index:100;
 backdrop-filter:blur(10px);
+flex-wrap:wrap;
 }
 .nav-btn{
 color:#ffd700;
@@ -51,6 +61,7 @@ font-weight:600;
 padding:10px 20px;
 border-radius:20px;
 transition:all 0.3s ease;
+font-size:0.9rem;
 }
 .nav-btn:hover{
 background:#ffd700;
@@ -118,41 +129,42 @@ transform:translateY(-10px);
 box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 .price{font-size:2rem;font-weight:800;color:#f59e0b}
-.trading-section{
+.section-title{
+font-size:2.5rem;
+color:#ffd700;
+margin:40px 0 20px;
+animation:glow 2s ease-in-out infinite;
+text-align:center;
+}
+.trading-section, .games-section{
 background:linear-gradient(135deg,#1a1f3a,#2d2959);
 padding:50px 20px;
 border-radius:25px;
 margin:30px auto;
 width:min(1100px,92%);
 }
-.trading-title{
-font-size:2.5rem;
-color:#ffd700;
-margin-bottom:30px;
-animation:glow 2s ease-in-out infinite;
-}
-.trading-cards{
+.trading-cards, .game-cards{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
-.trading-card{
+.trading-card, .game-card, .aviator-card{
 background:rgba(255,215,0,0.1);
 border:2px solid #ffd700;
 padding:25px;
 border-radius:15px;
 transition:all 0.3s ease;
 }
-.trading-card:hover{
+.trading-card:hover, .game-card:hover, .aviator-card:hover{
 transform:translateY(-10px);
 background:rgba(255,215,0,0.2);
 box-shadow:0 0 30px rgba(255,215,0,0.5);
 }
-.trading-card h3{
+.trading-card h3, .game-card h3, .aviator-card h3{
 color:#ffd700;
 margin-bottom:15px;
 font-size:1.3rem;
 }
-.trading-card p{
+.trading-card p, .game-card p, .aviator-card p{
 color:#e0e0e0;
 line-height:1.6;
 }
@@ -173,6 +185,52 @@ animation:pulse 2s ease-in-out infinite;
 .ticker-symbol{color:#ffd700;font-weight:700}
 .ticker-price{color:#4ade80}
 .ticker-change{color:#f87171}
+.game-info{
+background:rgba(0,0,0,0.3);
+padding:15px;
+border-radius:10px;
+margin:15px 0;
+border-left:4px solid #ffd700;
+}
+.min-bet{
+color:#4ade80;
+font-weight:700;
+}
+.odds{
+color:#f59e0b;
+font-weight:700;
+}
+.aviator-demo{
+background:rgba(0,0,0,0.5);
+padding:30px;
+border-radius:15px;
+margin:20px 0;
+text-align:center;
+position:relative;
+height:300px;
+border:2px solid #ffd700;
+overflow:hidden;
+}
+.airplane{
+font-size:4rem;
+animation:planeRise 8s ease-in infinite;
+position:absolute;
+left:0;
+bottom:20px;
+}
+.multiplier-display{
+font-size:2.5rem;
+color:#4ade80;
+font-weight:800;
+margin-top:20px;
+animation:pulse 1s ease-in-out infinite;
+}
+.crash-display{
+font-size:2rem;
+color:#f87171;
+font-weight:800;
+animation:crash 0.5s ease-out;
+}
 .formbox{
 width:min(800px,92%);margin:40px auto;
 background:rgba(255,255,255,.08);
@@ -215,15 +273,17 @@ footer{text-align:center;padding:30px}
 <a href="#home" class="nav-btn">🏠 Home</a>
 <a href="#data" class="nav-btn">📊 Data</a>
 <a href="#trading" class="nav-btn">💹 Trading</a>
+<a href="#games" class="nav-btn">🎮 Games</a>
+<a href="#aviator" class="nav-btn">✈️ Aviator</a>
 <a href="#order" class="nav-btn">🛒 Order</a>
 </nav>
 
 <section class="hero" id="home">
 <h1>CODE MICKEY</h1>
-<p>Premium Data & Trading Platform</p>
+<p>Premium Data, Trading & Gaming Hub</p>
 <div class="btn-group">
 <a class="btn" href="#data">Get Data</a>
-<a class="btn btn-secondary" href="#trading">Trade Now</a>
+<a class="btn btn-secondary" href="#games">Play & Win</a>
 </div>
 </section>
 
@@ -238,7 +298,7 @@ footer{text-align:center;padding:30px}
 </section>
 
 <section class="trading-section" id="trading">
-<h2 class="trading-title">💹 Live Trading Dashboard</h2>
+<h2 class="section-title">💹 Live Trading Dashboard</h2>
 
 <div class="trading-cards">
 <div class="trading-card">
@@ -294,8 +354,106 @@ footer{text-align:center;padding:30px}
 </div>
 </section>
 
+<section class="games-section" id="games">
+<h2 class="section-title">🎮 Games & Betting Hub</h2>
+
+<div class="game-cards">
+<div class="game-card">
+<h3>🎲 Dice Roll</h3>
+<p>Roll the dice and predict the outcome. Quick wins available!</p>
+<div class="game-info">
+<p><span class="min-bet">Min Bet:</span> GHS 5</p>
+<p><span class="odds">Odds:</span> 1:2 Payout</p>
+</div>
+</div>
+
+<div class="game-card">
+<h3>🎰 Slot Machine</h3>
+<p>Spin the reels and match symbols for massive wins!</p>
+<div class="game-info">
+<p><span class="min-bet">Min Bet:</span> GHS 10</p>
+<p><span class="odds">Odds:</span> 1:5 Payout</p>
+</div>
+</div>
+
+<div class="game-card">
+<h3>🃏 Card Game</h3>
+<p>Predict if the next card is higher or lower.</p>
+<div class="game-info">
+<p><span class="min-bet">Min Bet:</span> GHS 5</p>
+<p><span class="odds">Odds:</span> 1:2 Payout</p>
+</div>
+</div>
+
+<div class="game-card">
+<h3>⚽ Sports Betting</h3>
+<p>Predict football match results and earn big!</p>
+<div class="game-info">
+<p><span class="min-bet">Min Bet:</span> GHS 20</p>
+<p><span class="odds">Odds:</span> 1:3 - 1:10 Payout</p>
+</div>
+</div>
+
+<div class="game-card">
+<h3>🎯 Number Prediction</h3>
+<p>Guess the lucky numbers between 1-100.</p>
+<div class="game-info">
+<p><span class="min-bet">Min Bet:</span> GHS 5</p>
+<p><span class="odds">Odds:</span> 1:20 Payout</p>
+</div>
+</div>
+
+<div class="game-card">
+<h3>🎪 Lottery Draw</h3>
+<p>Daily lottery with massive jackpots!</p>
+<div class="game-info">
+<p><span class="min-bet">Min Bet:</span> GHS 1</p>
+<p><span class="odds">Odds:</span> 1:50 Payout</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="games-section" id="aviator">
+<h2 class="section-title">✈️ Aviator - Sky High Wins</h2>
+
+<div class="aviator-card">
+<h3>🚀 How Aviator Works</h3>
+<p>Watch the airplane fly higher and higher! Cash out before it crashes to win big!</p>
+
+<div class="aviator-demo">
+<div class="airplane">✈️</div>
+<div class="multiplier-display" id="multiplier">1.00x</div>
+</div>
+
+<div class="game-info">
+<p><strong>Game Rules:</strong></p>
+<p>1️⃣ Place your bet (Min: GHS 10)</p>
+<p>2️⃣ Watch the plane multiply your bet</p>
+<p>3️⃣ Click "Cash Out" before it crashes</p>
+<p>4️⃣ Win your multiplied amount!</p>
+<p style="margin-top:15px; color:#f87171;"><strong>⚠️ If the plane crashes, you lose your bet!</strong></p>
+</div>
+
+<div class="stock-ticker" style="margin-top:20px;">
+<div class="ticker-item">
+<span class="ticker-symbol">Current Multiplier</span>
+<span class="ticker-price" id="current-multi">1.25x</span>
+</div>
+<div class="ticker-item">
+<span class="ticker-symbol">Max Payout Reached</span>
+<span class="ticker-price">100.50x</span>
+</div>
+<div class="ticker-item">
+<span class="ticker-symbol">Daily Winners</span>
+<span class="ticker-price">1,247</span>
+</div>
+</div>
+</div>
+</section>
+
 <section class="formbox" id="order">
-<h2>Live Order Form - Data & Trading</h2>
+<h2>Live Order Form - Complete Platform</h2>
 
 <form id="orderForm">
 <input type="text" id="name" placeholder="Full Name" required>
@@ -308,16 +466,20 @@ footer{text-align:center;padding:30px}
 <option value="forex">💹 Forex Trading</option>
 <option value="crypto">🪙 Crypto Trading</option>
 <option value="stocks">📈 Stock Trading</option>
+<option value="games">🎮 Games & Betting</option>
+<option value="aviator">✈️ Aviator Game</option>
 </select>
 
 <select id="package" required>
 <option value="">Select Package</option>
-<option>1 GB - GHS 10</option>
-<option>5 GB - GHS 40</option>
-<option>10 GB - GHS 75</option>
-<option>Forex - GHS 50</option>
-<option>Crypto - GHS 25</option>
-<option>Stocks - GHS 100</option>
+<option>1 GB Data - GHS 10</option>
+<option>5 GB Data - GHS 40</option>
+<option>10 GB Data - GHS 75</option>
+<option>Forex Trading - GHS 50</option>
+<option>Crypto Trading - GHS 25</option>
+<option>Stock Trading - GHS 100</option>
+<option>Games Package - GHS 20</option>
+<option>Aviator Game - GHS 10</option>
 </select>
 
 <input type="text" id="transaction" placeholder="MoMo Transaction ID" required>
@@ -331,12 +493,35 @@ footer{text-align:center;padding:30px}
 </section>
 
 <footer>
-<h3>Code Mickey - Data & Trading Hub</h3>
+<h3>Code Mickey - Complete Gaming & Trading Hub</h3>
 <p>📞 WhatsApp: +233 53 037 4086</p>
-<p>💰 Secure | 📱 Fast | 🔒 Reliable</p>
+<p>💰 Data | 📈 Trading | 🎮 Gaming | ✈️ Aviator</p>
+<p>🔒 Secure | 📱 Fast | 💎 Rewarding</p>
 </footer>
 
 <script>
+let multiplier = 1.00;
+let aviatorInterval;
+
+function updateAviator(){
+multiplier += Math.random() * 0.15;
+document.getElementById('multiplier').textContent = multiplier.toFixed(2) + 'x';
+document.getElementById('current-multi').textContent = multiplier.toFixed(2) + 'x';
+
+if(Math.random() > 0.95){
+document.getElementById('multiplier').innerHTML = '<span style="color:#f87171;">💥 CRASHED!</span>';
+clearInterval(aviatorInterval);
+multiplier = 1.00;
+setTimeout(startAviator, 3000);
+}
+}
+
+function startAviator(){
+multiplier = 1.00;
+document.getElementById('multiplier').textContent = '1.00x';
+aviatorInterval = setInterval(updateAviator, 500);
+}
+
 document.getElementById("orderForm").addEventListener("submit", function(e){
 e.preventDefault();
 
@@ -358,6 +543,8 @@ result.innerHTML=`
 <p>Please send these details to WhatsApp: +233530374086 for processing.</p>
 `;
 });
+
+startAviator();
 </script>
 
 </body>
