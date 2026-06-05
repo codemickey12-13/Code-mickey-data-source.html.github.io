@@ -15,26 +15,72 @@ body{
 background:linear-gradient(135deg,#0f172a,#111827,#1e3a8a);
 color:#fff;overflow-x:hidden;
 }
+@keyframes gradientShift{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@keyframes float{
+0%,100%{transform:translateY(0px)}
+50%{transform:translateY(-20px)}
+}
+@keyframes glow{
+0%,100%{box-shadow:0 0 20px rgba(255,215,0,0.5)}
+50%{box-shadow:0 0 40px rgba(255,215,0,0.8)}
+}
 .hero{
 min-height:100vh;display:flex;flex-direction:column;
 justify-content:center;align-items:center;text-align:center;padding:20px;
+background:linear-gradient(-45deg,#0f172a,#1e3a8a,#111827,#ffd700);
+background-size:400% 400%;
+animation:gradientShift 15s ease infinite;
+position:relative;
+overflow:hidden;
 }
-.hero h1{font-size:4rem;color:#ffd700}
-.hero p{max-width:700px;margin:15px 0}
+.hero::before{
+content:'';
+position:absolute;
+width:200%;
+height:200%;
+background:radial-gradient(circle,rgba(255,215,0,0.1) 1px,transparent 1px);
+background-size:50px 50px;
+animation:float 8s ease-in-out infinite;
+top:-50%;
+left:-50%;
+z-index:0;
+}
+.hero > *{position:relative;z-index:1}
+.hero h1{font-size:4rem;color:#ffd700;animation:glow 2s ease-in-out infinite}
+.hero p{max-width:700px;margin:15px 0;animation:float 3s ease-in-out infinite}
 .btn{
 background:#ffd700;color:#111;padding:14px 30px;
 border-radius:30px;text-decoration:none;font-weight:700;
+transition:all 0.3s ease;
+animation:float 2s ease-in-out infinite;
+}
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 30px rgba(255,215,0,0.8);
 }
 .flyer{
 width:min(1100px,92%);margin:30px auto;
 background:linear-gradient(135deg,#ffd700,#f59e0b);
 color:#111;border-radius:25px;padding:40px;text-align:center;
+animation:glow 2s ease-in-out infinite;
 }
 .cards{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;margin-top:25px;
 }
-.card{background:#fff;padding:20px;border-radius:20px}
+.card{
+background:#fff;padding:20px;border-radius:20px;
+transition:all 0.3s ease;
+animation:float 3s ease-in-out infinite;
+}
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
 .price{font-size:2rem;font-weight:800;color:#f59e0b}
 .formbox{
 width:min(800px,92%);margin:40px auto;
@@ -45,15 +91,28 @@ backdrop-filter:blur(10px);
 input,select,textarea{
 width:100%;padding:14px;margin:10px 0;
 border:none;border-radius:10px;
+transition:all 0.3s ease;
+}
+input:focus,select:focus,textarea:focus{
+outline:none;
+box-shadow:0 0 20px rgba(255,215,0,0.5);
+transform:scale(1.02);
 }
 button{
 width:100%;padding:15px;border:none;
 border-radius:10px;background:#ffd700;
 font-weight:700;cursor:pointer;
+transition:all 0.3s ease;
+animation:glow 1.5s ease-in-out infinite;
+}
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 30px rgba(255,215,0,0.9);
 }
 #result{
 margin-top:20px;padding:15px;border-radius:10px;
 display:none;background:rgba(34,197,94,.2);
+animation:float 0.5s ease-in-out;
 }
 footer{text-align:center;padding:30px}
 </style>
